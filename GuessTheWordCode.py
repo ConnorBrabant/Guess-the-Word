@@ -1,9 +1,4 @@
 '''
-Connor Brabant, Anthony DiMarco
-cbraban1@binghamton.edu, adimarc1@binghamton.edu
-Final Project - Code
-'''
-'''
 This program simulates a game of hangman using class called Hangman,
 taking in entered letters from an attached GUI and matching them with
 the according word.It filters the entered letters by correctness, either
@@ -59,9 +54,6 @@ class Hangman:
 
         if len(self.__word) >= 10:
             guessesRemaining = math.ceil((len(self.__word)/2) - len(self.__incorrectList))
-            #print(len(self.__word)/2)
-            #print(math.ceil(len(self.__word)/2))
-            #print(guessesRemaining)
         else:
             guessesRemaining = 5 - len(self.__incorrectList)
         return guessesRemaining
@@ -82,9 +74,7 @@ class Hangman:
           self.__list = [index for index, letter in enumerate(word)
                          if letter == inputLetter]
           self.incorrectList = [0]
-          #print(len(self.__list)) debug to see if list is adding guesses
           return True
-          #print(self.__list) #debug prints position of char in word
         else:
           self.__list = [0]
           self.__incorrectList.append(inputLetter)
@@ -96,22 +86,15 @@ class Hangman:
 
     def solveTheHangman(self, letterFromEntry):
         newString = ""
-        #print(newString) #debug
         textList = list(self.__wordResult)
-        #print(textList) #debug
         self.__list = self.retrieveList()
-        #print(self.__list) #debug
 
         #self.__list receives input from find function and
         #then uses these characters to solve hangman
         positionInList = self.__list
-        #print(positionInList)
         for eachLetter in positionInList:
-            #print(eachLetter) #debug
             textList[eachLetter * 2] = letterFromEntry
-            #print(letterFromEntry)
             newString = ''.join(textList)
-            #print(newString) #debug
             self.__wordResult = newString
 
 
@@ -121,7 +104,6 @@ class Hangman:
     def incorrectListToAnswer(self):
        incorrectString = ""
        for each in self.__incorrectList:
-           #print(each) debug
            incorrectString = incorrectString + each
            self.__incorrectResult = incorrectString
 

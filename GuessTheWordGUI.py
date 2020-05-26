@@ -1,9 +1,4 @@
 '''
-Connor Brabant, Anthony DiMarco
-cbraban1@binghamton.edu, adimarc1@binghamton.edu
-Final Project - GUI
-'''
-'''
 This GUI is used interactively with the imported program to create a display
 that shows the user entered guesses, correct responses, and a button that
 starts the game.
@@ -27,7 +22,7 @@ Tasks Allocated for
 
 from tkinter import *
 from tkinter import messagebox
-from Code import *
+from GuessTheWordCode import *
 
 TURNS = 0
 
@@ -87,8 +82,6 @@ class GUI():
         self.__variable.set(self.__Hangman.retrieveAnswer())
         self.__GuessRemaining.set(self.__Hangman.guessesRemaining())
 
-        #print(self.__Hangman.wordToSolve()) debug
-
     def clearAllWidgets(self):
         self.__Hangman.clearIncorrectGuessList()
         self.__Hangman.clearCorrectGuessList()
@@ -123,29 +116,17 @@ Please try again!''')
 
     def entryBox(self, event): #utilizes entrybox to solve puzzle
         yourWord = self.__Hangman.retrieveWord()
-        #print(yourWord) #debug prints randomword that was generated
-        #print(len(yourWord))
-        #print(self.__Hangman.retrieveAnswer())
         yourLetter = self.__EntryLabel.get()
         if GUI.entryIsLetter(self) == True and GUI.notDuplicate(self) == True:
-            #print(yourLetter) #debug prints letter that was entered
             if self.__Hangman.guess(yourWord, yourLetter) == True:
-                #print(self.__Hangman.find(theWord, theLetter))
-                #self.__Hangman.find(yourWord, yourLetter)
                 self.__Hangman.solveTheHangman(yourLetter)
-                    #print(self.__Hangman.solveTheHangman(theLetter))
                 self.__variable.set(self.__Hangman.retrieveAnswer())
                 self.__EntryLabel.delete(0, END)
-                    #print(self.__variable.set(self.__Hangman.retrieveAnswer()))
             else:
                 self.__Hangman.incorrectListToAnswer()
-                #print(self.__Hangman.incorrectListToAnswer())
                 self.__GuessVariable.set(self.__Hangman.retrieveIncorrectResult())
                 self.__EntryLabel.delete(0, END)
                 self.__GuessRemaining.set(self.__Hangman.guessesRemaining())
-            #print(len(self.__Hangman.retrieveIncorrectList())) debug for incorrect list
-            #print(len(self.__Hangman.retrieveAnswer()))
-            #if len(self.__Hangman.retrieveIncorrectList()) == 5:
             if self.__Hangman.guessesRemaining() == 0:
                 messageText ='Sorry! You have ran out of turns. \nThe correct word was: {yourWord} \nWould you like to play again?'.format(yourWord = yourWord)
                 response = messagebox.askyesno('You lost!', messageText)
